@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,7 +14,7 @@
 
     <h1>Click a Button to Copy Text</h1>
 
-    <button class="btn" onclick="copyText('ARITHMETIC OPERATION USING SWITCH CASE.txt')">Copy Text 1</button>
+    <button class="btn" onclick="copyText('file1.txt')">Copy Text 1</button>
     <button class="btn" onclick="copyText('file2.txt')">Copy Text 2</button>
     <button class="btn" onclick="copyText('file3.txt')">Copy Text 3</button>
     <button class="btn" onclick="copyText('file4.txt')">Copy Text 4</button>
@@ -29,10 +29,19 @@
     <button class="btn" onclick="copyText('file13.txt')">Copy Text 13</button>
     <button class="btn" onclick="copyText('file14.txt')">Copy Text 14</button>
     <button class="btn" onclick="copyText('file15.txt')">Copy Text 15</button>
- <script>
+
+    <script>
         function copyText(fileName) {
-            fetch(fileName)
-                .then(response => response.text())
+            // Replace 'your-username' and 'your-repository' with your actual GitHub username and repository name
+            let fileURL = https://raw.githubusercontent.com/your-username/your-repository/main/${fileName};
+
+            fetch(fileURL)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("File not found or cannot be accessed.");
+                    }
+                    return response.text();
+                })
                 .then(text => {
                     navigator.clipboard.writeText(text)
                         .then(() => alert("Text copied successfully!"))
