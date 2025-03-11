@@ -1,0 +1,27 @@
+<?php
+$x = 10;
+$y = 4;
+$operator = "*";
+switch ($operator) {
+case "+":
+echo $x + $y;
+break;
+case "-":
+echo $x - $y;
+break;
+case "*":
+echo $x * $y;
+break;
+case "/":
+echo $x / $y;
+break;
+case "^":
+echo $x ^ $y;
+break;
+case "%":
+echo $x % $y;
+break;
+default:
+echo "Incorrect Operator";
+break;
+}

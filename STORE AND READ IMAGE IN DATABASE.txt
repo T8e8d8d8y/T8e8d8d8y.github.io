@@ -1,0 +1,71 @@
+<?php
+// Database connection
+$host = "localhost";
+$username = "root";
+$password = "";
+$database = "db";
+
+// Create connection
+$conn = new mysqli($host, $username, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Check if form is submitted
+if ($_SERVER["REQUEST_METHOD"]=="POST") {
+    $name = $_POST['name'];
+    $image = $_FILES['image']['tmp_name'];
+
+    // Convert image to binary data
+    $imgContent = addslashes(file_get_contents($image));
+
+    // Insert image into the database
+    $sql = "INSERT INTO phpimage (name, image) VALUES ('$name', '$imgContent')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Image uploaded successfully.";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
+
+// Fetch images from database
+$sql = "SELECT id, name, image FROM phpimage";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo "<h3>" . htmlspecialchars($row['name']) . "</h3>";
+        // Corrected the image tag, fixed missing spaces and attributes
+        echo '<img src="data:image/jpeg;base64,' . base64_encode($row['image']) . '" width="300"><br><br>';
+    }
+} else {
+    echo "No images found.";
+}
+
+// Close connection
+$conn->close();
+?>
+
+
+HTML Program:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<metacharset="UTF-8">
+<title>UploadImage</title>
+</head>
+<body>
+<h2>UploadImage</h2>
+<form action="insertimage.php" method="post" enctype="multipart/form-data">
+<label for="name">ImageName:</label>
+<input type="text"name="name"required><br><br>
+<label for="image">ChooseImage:</label>
+<input type="file"name="image"accept="image/*"required><br><br>
+<button type="submit">Upload</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,53 @@
+
+<?php 
+$servername = "localhost"; 
+$username = "root";  
+$password = "";  
+$dbname = "dbshriya"; 
+$conn = new mysqli($servername, $username, $password, $dbname); 
+if ($conn->connect_error) { 
+die("Connection failed: " . $conn->connect_error); 
+} 
+$name = $_POST['name']; 
+$class = $_POST['class']; 
+$age = $_POST['age']; 
+$college = $_POST['college']; 
+$year = $_POST['year']; 
+$state = $_POST['state']; 
+$sql = "INSERT INTO contacts (name, class, age, college, year, state)   VALUES ('$name', '$class', '$age', '$college', '$year', '$state')"; 
+if ($conn->query($sql) === TRUE) { 
+ echo "Message sent successfully!"; 
+} else { 
+ echo "Error: " . $sql . "<br>" . $conn->error; 
+} 
+$conn->close(); 
+?>
+
+
+HTML File:
+
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+ <meta charset="UTF-8"> 
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Contact Form</title> 
+</head> 
+<body> 
+ <h2>Contact Us</h2> 
+ <form action="contactphp.php" method="post"> 
+ <label for="name">Name:</label> 
+ <input type="text" name="name" required><br><br> 
+ <label for="class">Class:</label> 
+ <input type="text" name="class" required><br><br> 
+ <label for="age">Age:</label> 
+ <input type="number" name="age" required><br><br> 
+ <label for="college">College:</label> 
+ <input type="text" name="college" required><br><br> 
+ <label for="year">Year:</label> 
+ <input type="text" name="year" required><br><br> 
+ <label for="state">State:</label> 
+ <input type="text" name="state" required><br><br> 
+ <button type="submit">Submit</button> 
+ </form> 
+</body> 
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GitHub File Copy</title>
+    <script>
+        async function copyText(fileUrl) {
+            try {
+                let response = await fetch(fileUrl);
+                let text = await response.text();
+                navigator.clipboard.writeText(text);
+                alert("Text copied!");
+            } catch (err) {
+                alert("Failed to copy text.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Copy Text from GitHub Files</h2>
+    <button onclick="copyText('https://raw.githubusercontent.com/yourusername/my-github-pages-site/main/file1.txt')">Copy File 1</button>
+    <button onclick="copyText('https://raw.githubusercontent.com/yourusername/my-github-pages-site/main/file2.txt')">Copy File 2</button>
+    <button onclick="copyText('https://raw.githubusercontent.com/yourusername/my-github-pages-site/main/file3.txt')">Copy File 3</button>
+    <button onclick="copyText('https://raw.githubusercontent.com/yourusername/my-github-pages-site/main/file4.txt')">Copy File 4</button>
+    <button onclick="copyText('https://raw.githubusercontent.com/yourusername/my-github-pages-site/main/file5.txt')">Copy File 5</button>
+    <!-- Add more buttons for remaining files up to 15 -->
+</body>
+</html>
