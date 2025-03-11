@@ -9,21 +9,21 @@
     <h1>Click a button to copy text from a file:</h1>
 
     <!-- Buttons for each file -->
-    <button onclick="copyText(ARITHMETIC OPERATION USING SWITCH CASE.txt)">File 1</button>
-    <button onclick="copyText(2)">File 2</button>
-    <button onclick="copyText(3)">File 3</button>
-    <button onclick="copyText(4)">File 4</button>
-    <button onclick="copyText(5)">File 5</button>
-    <button onclick="copyText(6)">File 6</button>
-    <button onclick="copyText(7)">File 7</button>
-    <button onclick="copyText(8)">File 8</button>
-    <button onclick="copyText(9)">File 9</button>
-    <button onclick="copyText(10)">File 10</button>
-    <button onclick="copyText(11)">File 11</button>
-    <button onclick="copyText(12)">File 12</button>
-    <button onclick="copyText(13)">File 13</button>
-    <button onclick="copyText(14)">File 14</button>
-    <button onclick="copyText(15)">File 15</button>
+    <button onclick="copyText('ARITHMETIC OPERATION USING SWITCH CASE.txt')">File 1</button>
+    <button onclick="copyText('file2.txt')">File 2</button>
+    <button onclick="copyText('file3.txt')">File 3</button>
+    <button onclick="copyText('file4.txt')">File 4</button>
+    <button onclick="copyText('file5.txt')">File 5</button>
+    <button onclick="copyText('file6.txt')">File 6</button>
+    <button onclick="copyText('file7.txt')">File 7</button>
+    <button onclick="copyText('file8.txt')">File 8</button>
+    <button onclick="copyText('file9.txt')">File 9</button>
+    <button onclick="copyText('file10.txt')">File 10</button>
+    <button onclick="copyText('file11.txt')">File 11</button>
+    <button onclick="copyText('file12.txt')">File 12</button>
+    <button onclick="copyText('file13.txt')">File 13</button>
+    <button onclick="copyText('file14.txt')">File 14</button>
+    <button onclick="copyText('file15.txt')">File 15</button>
 
     <!-- Hidden textarea to store text -->
     <textarea id="textArea" style="position: absolute; top: -9999px;"></textarea>
@@ -33,9 +33,9 @@
         const baseGitHubUrl = "https://raw.githubusercontent.com/your-username/your-repository-name/main/";
 
         // Function to copy text from the file
-        function copyText(fileNumber) {
+        function copyText(fileName) {
             // Construct the URL for the file on GitHub
-            const fileUrl = baseGitHubUrl + `file${fileNumber}.txt`;
+            const fileUrl = baseGitHubUrl + fileName;
 
             // Fetch the file content from GitHub
             fetch(fileUrl)
@@ -58,7 +58,7 @@
                     document.execCommand('copy');
 
                     // Alert user
-                    alert('Copied text from File ' + fileNumber);
+                    alert('Copied text from ' + fileName);
                 })
                 .catch(error => {
                     console.error('Error fetching the file:', error);
