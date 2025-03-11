@@ -1,27 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>GitHub File Copy</title>
-    <script>
-        async function copyText(fileUrl) {
-            try {
-                let response = await fetch(fileUrl);
-                let text = await response.text();
-                navigator.clipboard.writeText(text);
-                alert("Text copied!");
-            } catch (err) {
-                alert("Failed to copy text.");
-            }
-        }
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy Text from Files</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        .btn { padding: 10px 20px; margin: 5px; cursor: pointer; background-color: blue; color: white; border: none; }
+        .btn:hover { background-color: darkblue; }
+    </style>
 </head>
 <body>
-    <h2>Copy Text from GitHub Files</h2>
-    <button onclick="copyText('https://raw.githubusercontent.com/yourusername/my-github-pages-site/main/ARITHMETIC OPERATION USING SWITCH CASE.txt')">Copy File 1</button>
-    <button onclick="copyText('https://raw.githubusercontent.com/yourusername/my-github-pages-site/main/file2.txt')">Copy File 2</button>
-    <button onclick="copyText('https://raw.githubusercontent.com/yourusername/my-github-pages-site/main/file3.txt')">Copy File 3</button>
-    <button onclick="copyText('https://raw.githubusercontent.com/yourusername/my-github-pages-site/main/file4.txt')">Copy File 4</button>
-    <button onclick="copyText('https://raw.githubusercontent.com/yourusername/my-github-pages-site/main/file5.txt')">Copy File 5</button>
-    <!-- Add more buttons for remaining files up to 15 -->
+
+    <h1>Click a Button to Copy Text</h1>
+
+    <button class="btn" onclick="copyText('ARITHMETIC OPERATION USING SWITCH CASE.txt')">Copy Text 1</button>
+    <button class="btn" onclick="copyText('file2.txt')">Copy Text 2</button>
+    <button class="btn" onclick="copyText('file3.txt')">Copy Text 3</button>
+    <button class="btn" onclick="copyText('file4.txt')">Copy Text 4</button>
+    <button class="btn" onclick="copyText('file5.txt')">Copy Text 5</button>
+    <button class="btn" onclick="copyText('file6.txt')">Copy Text 6</button>
+    <button class="btn" onclick="copyText('file7.txt')">Copy Text 7</button>
+    <button class="btn" onclick="copyText('file8.txt')">Copy Text 8</button>
+    <button class="btn" onclick="copyText('file9.txt')">Copy Text 9</button>
+    <button class="btn" onclick="copyText('file10.txt')">Copy Text 10</button>
+    <button class="btn" onclick="copyText('file11.txt')">Copy Text 11</button>
+    <button class="btn" onclick="copyText('file12.txt')">Copy Text 12</button>
+    <button class="btn" onclick="copyText('file13.txt')">Copy Text 13</button>
+    <button class="btn" onclick="copyText('file14.txt')">Copy Text 14</button>
+    <button class="btn" onclick="copyText('file15.txt')">Copy Text 15</button>
+ <script>
+        function copyText(fileName) {
+            fetch(fileName)
+                .then(response => response.text())
+                .then(text => {
+                    navigator.clipboard.writeText(text)
+                        .then(() => alert("Text copied successfully!"))
+                        .catch(err => alert("Failed to copy text: " + err));
+                })
+                .catch(err => alert("Error loading file: " + err));
+        }
+    </script>
+
 </body>
 </html>
