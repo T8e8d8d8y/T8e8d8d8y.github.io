@@ -1,56 +1,70 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Copy Text from Files</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-        .btn { padding: 10px 20px; margin: 5px; cursor: pointer; background-color: blue; color: white; border: none; }
-        .btn:hover { background-color: darkblue; }
-    </style>
 </head>
 <body>
+    <h1>Click a button to copy text from a file:</h1>
 
-    <h1>Click a Button to Copy Text</h1>
+    <!-- Buttons for each file -->
+    <button onclick="copyText()">File 1</button>
+    <button onclick="copyText(2)">File 2</button>
+    <button onclick="copyText(3)">File 3</button>
+    <button onclick="copyText(4)">File 4</button>
+    <button onclick="copyText(5)">File 5</button>
+    <button onclick="copyText(6)">File 6</button>
+    <button onclick="copyText(7)">File 7</button>
+    <button onclick="copyText(8)">File 8</button>
+    <button onclick="copyText(9)">File 9</button>
+    <button onclick="copyText(10)">File 10</button>
+    <button onclick="copyText(11)">File 11</button>
+    <button onclick="copyText(12)">File 12</button>
+    <button onclick="copyText(13)">File 13</button>
+    <button onclick="copyText(14)">File 14</button>
+    <button onclick="copyText(15)">File 15</button>
 
-    <button class="btn" onclick="copyText('ARITHMETIC OPERATION USING SWITCH CASE.txt')">Copy Text 1</button>
-    <button class="btn" onclick="copyText('BIRTHDAY COUNTDOWN.txt')">Copy Text 2</button>
-    <button class="btn" onclick="copyText('BIODATA.txt')">Copy Text 3</button>
-    <button class="btn" onclick="copyText('CHECKING LOWERCASE.txt')">Copy Text 4</button>
-    <button class="btn" onclick="copyText('CHESS BOARD.txt')">Copy Text 5</button>
-    <button class="btn" onclick="copyText('CONTACT FORM.txt')">Copy Text 6</button>
-    <button class="btn" onclick="copyText('DISPLAY COLORS.txt')">Copy Text 7</button>
-    <button class="btn" onclick="copyText('INSERT NEW ITEM IN AN ARRAY.txt')">Copy Text 8</button>
-    <button class="btn" onclick="copyText('INSERTING AND FETCHING DATA FORM AN DATABASE.txt')">Copy Text 9</button>
-    <button class="btn" onclick="copyText('OBJECTS AND METHODS.txt')">Copy Text 10</button>
-    <button class="btn" onclick="copyText('PALINDROME.txt')">Copy Text 11</button>
-    <button class="btn" onclick="copyText('RANDOME PASSWORD.txt')">Copy Text 12</button>
-    <button class="btn" onclick="copyText('SORTING AN ARRAY.txt')">Copy Text 13</button>
-    <button class="btn" onclick="copyText('STORE AND READ IMAGE IN DATABASE.txt')">Copy Text 14</button>
-    <button class="btn" onclick="copyText('STRING FUNCTIONS.txt')">Copy Text 15</button>
+    <!-- Hidden textarea to store text -->
+    <textarea id="textArea" style="position: absolute; top: -9999px;"></textarea>
 
     <script>
-        function copyText(fileName) {
-            // Replace 'your-username' and 'your-repository' with your actual GitHub username and repository name
-            let fileURL = https:raw.githubusercontent.com/T8e8d8d8y/T8e8d8d8y.github.io/main/${fileName};
+        // Replace this with the correct URL of your GitHub repository
+        const baseGitHubUrl = "https://raw.githubusercontent.com/your-username/your-repository-name/main/";
 
-            fetch(fileURL)
+        // Function to copy text from the file
+        function copyText(fileNumber) {
+            // Construct the URL for the file on GitHub
+            const fileUrl = baseGitHubUrl + `file${fileNumber}.txt`;
+
+            // Fetch the file content from GitHub
+            fetch(fileUrl)
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error("File not found or cannot be accessed.");
+                        throw new Error('Network response was not ok');
                     }
                     return response.text();
                 })
-                .then(text => {
-                    navigator.clipboard.writeText(text)
-                        .then(() => alert("Text copied successfully!"))
-                        .catch(err => alert("Failed to copy text: " + err));
+                .then(content => {
+                    // Get the hidden textarea
+                    const textArea = document.getElementById('textArea');
+                    textArea.value = content; // Set the content of the file to the textarea
+
+                    // Select the text in the textarea
+                    textArea.select();
+                    textArea.setSelectionRange(0, 99999); // For mobile devices
+
+                    // Copy the text to the clipboard
+                    document.execCommand('copy');
+
+                    // Alert user
+                    alert('Copied text from File ' + fileNumber);
                 })
-                .catch(err => alert("Error loading file: " + err));
+                .catch(error => {
+                    console.error('Error fetching the file:', error);
+                    alert('There was an error fetching the file.');
+                });
         }
     </script>
-
 </body>
 </html>
-
